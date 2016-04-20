@@ -18,19 +18,6 @@
 # Pin3 = 16
 # Pin4 = 26
 
-# export the pins for use
-echo "16" > /sys/class/gpio/export
-echo "20" > /sys/class/gpio/export
-echo "21" > /sys/class/gpio/export
-echo "26" > /sys/class/gpio/export
-
-# set the GPIO direction
-echo "out" > /sys/class/gpio/gpio16/direction 
-echo "out" > /sys/class/gpio/gpio20/direction
-echo "out" > /sys/class/gpio/gpio21/direction
-echo "out" > /sys/class/gpio/gpio26/direction
-
-
 function pin1 {
 	echo $1 > /sys/class/gpio/gpio21/value
 }
@@ -47,4 +34,6 @@ function pin4 {
         echo $1 > /sys/class/gpio/gpio26/value
 }
 
-for i in 1 2 3 4; do pin$i 0 && sleep .1 && pin$i 1 && sleep .1; done
+while true; do 
+	for i in 1 2 3 4; do pin$i 0 && sleep .1 && pin$i 1 && sleep .1; done
+done
